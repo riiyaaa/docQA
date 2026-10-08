@@ -1,0 +1,14 @@
+Quillmere AirPure AP300 - Firmware Release Notes
+Quillmere Appliances is a fictional company. Test document for DocQA.
+
+Version 2.1.0 (March 2, 2026)
+- New: Schedule Turbo mode from the Quillmere Home app.
+- Fixed: E11 sensor error appearing incorrectly in high humidity (above 80%).
+- Known issue: Child lock turns off after a power outage. A fix is planned for version 2.1.1.
+
+Version 2.0.3 (November 18, 2025)
+- Improved: Sleep mode noise reduced from 26 dB to 24 dB.
+- Improved: Faster Wi-Fi reconnection after router restarts.
+
+Version 1.9.0 (June 10, 2025)
+- New: Support for the Quillmere Home app.
