@@ -34,3 +34,17 @@ python cli.py chat
 
 `pytest` runs the pipeline with fake embeddings and a scripted LLM, so no
 Ollama is needed.
+
+## Evaluation
+
+`sample_docs/` holds a fictional document set (an invented appliance company)
+and `eval/questions.jsonl` holds 40 questions with known answers and source
+pages, including look-alike distractors and questions the documents can't
+answer. One command measures retrieval and answer quality:
+
+```bash
+python eval/run_eval.py --retrieval-only   # compare vector, BM25, and hybrid search
+python eval/run_eval.py                    # full run, including answers
+```
+
+See [eval/README.md](eval/README.md) for the metrics and options.

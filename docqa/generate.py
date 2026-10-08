@@ -36,7 +36,11 @@ class Answerer:
         self.chain = PROMPT | llm | StrOutputParser()
 
     def ask(self, question: str) -> dict:
-        docs = self.retriever.retrieve(question)
+        return self.answer(question, self.retriever.retrieve(question))
+
+    def answer(self, question: str, docs) -> dict:
+        """Answer from passages that were already retrieved. Split out from ask()
+        so the evaluation can score retrieval and the answer on the same passages."""
         if not docs:
             return {"answer": NOT_FOUND, "sources": []}
 
@@ -51,5 +55,7 @@ class Answerer:
         cited = sorted({int(n) for n in re.findall(r"\[(\d+)\]", answer)
                         if 1 <= int(n) <= len(docs)})
         sources = [{"n": n, "source": source_label(docs[n - 1]),
+                    "file": docs[n - 1].metadata["source"],
+                    "page": docs[n - 1].metadata.get("page"),
                     "snippet": docs[n - 1].page_content[:200]} for n in cited]
         return {"answer": answer, "sources": sources}
